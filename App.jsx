@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, useRef, useMemo, useCallback } from "react";
+import React, { useReducer, useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { PHASES, PROVIDERS } from "./constants/AppConstants";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import { getProviderConfig, findProvider } from "./api/providerConfig";
@@ -88,11 +88,11 @@ export default function App() {
   const { goal, phases, phaseOrder, quote } = goalState;
 
   // Transient UI state
-  const [inputVal, setInputVal] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState("");
-  const [confetti, setConfetti] = React.useState(false);
-  const [activePhaseIndex, setActivePhaseIndex] = React.useState(0);
+  const [inputVal, setInputVal] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [confetti, setConfetti] = useState(false);
+  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const inputRef = useRef(null);
 
   // Persist goal state to localStorage whenever it changes
@@ -167,7 +167,6 @@ export default function App() {
 
     setLoading(true);
     setError("");
-    dispatch({ type: "SET_GOAL_DATA", goal: "", phases: {}, phaseOrder: [], quote: "" });
     logger.log("Sending request via", currentProvider.name);
 
     try {

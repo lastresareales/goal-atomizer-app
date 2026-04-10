@@ -1,4 +1,9 @@
-const isDev = typeof process !== "undefined" && process.env?.NODE_ENV === "development";
+let isDev = false;
+try {
+  isDev = typeof process !== "undefined" && process.env?.NODE_ENV === "development";
+} catch {
+  isDev = false;
+}
 
 export const logger = {
   log: (message, data) => {
